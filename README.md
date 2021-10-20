@@ -51,9 +51,24 @@ pathfinder.put_image(output_image, 'path/to/pathed_file.jpg')
 
 ---
 ### Examples
-1. Input image
-![Input image](https://github.com/mnogom/pathfinder/blob/main/examples/1/plan.jpg?raw=true "Optional Title")
+1. Input image `examples/1/plan.jpg`
+![Input image](https://github.com/mnogom/pathfinder/blob/main/examples/1/plan.jpg?raw=true)
 ```commandline
-poetry run pathfinder examples/1/plan.jpg -s 420 380 -g 520 600 -r 5 -w 240
+pathfinder examples/1/plan.jpg -s 420 380 -g 250 40 -r 5 -w 240
 ```
-![Output image](https://github.com/mnogom/pathfinder/blob/main/examples/1/plan-from-\(420, 380\)-to-\(520, 600\).jpg?raw=true "Optional Title")
+![Output image](https://github.com/mnogom/pathfinder/blob/main/examples/1/plan-from-420_380-to-250_40.jpg?raw=true)
+```commandline
+pathfinder examples/1/plan.jpg -s 420 380 -g 520 600 -r 5 -w 240
+```
+![Output image](https://github.com/mnogom/pathfinder/blob/main/examples/1/plan-from-420_380-to-520_600.jpg?raw=true)
+```commandline
+pathfinder examples/1/plan.jpg -s 420 380 -g 45 350 -r 5 -w 240
+```
+![Output image](https://github.com/mnogom/pathfinder/blob/main/examples/1/plan-from-420_380-to-45_350.jpg?raw=true)
+
+2. Input image `examples/2/maze.jpg`
+![Input image](https://github.com/mnogom/pathfinder/blob/main/examples/2/maze.jpg?raw=true)
+```commandline
+pathfinder examples/2/maze.jpg -s 20 300 -g 620 300 -r 8
+```
+![Output image](https://github.com/mnogom/pathfinder/blob/main/examples/2/maze-from-20_300-to-620_300.jpg?raw=true)
