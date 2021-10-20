@@ -14,10 +14,14 @@ def main() -> None:
      start_x,
      start_y,
      goal_x,
-     goal_y] = cli.parse_args()
+     goal_y,
+     reduce_factor,
+     white_value] = cli.parse_args()
 
     directory, name = os.path.split(image_path)
-    plan = layout.read(image_path)
+    plan = layout.read(image_path,
+                       reduce_factor=reduce_factor,
+                       white_value=white_value)
 
     pathfinder.get_path(start_x,
                         start_y,

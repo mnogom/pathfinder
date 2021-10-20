@@ -15,7 +15,9 @@ pip3 install --upgrade git+https://github.com/mnogom/pathfinder.git
 ### Usage
 1. From command line:
 ```commandline
-usage: pathfinder [-h] [-s START START] [-g GOAL GOAL] path
+usage: pathfinder [-h] [-s START START] [-g GOAL GOAL] [-r REDUCE_FACTOR]
+                  [-w WHITE_VALUE]
+                  path
 
 Path finder
 
@@ -28,7 +30,10 @@ optional arguments:
                         start coordinates
   -g GOAL GOAL, --goal GOAL GOAL
                         goal coordinates
- 
+  -r REDUCE_FACTOR, --reduce-factor REDUCE_FACTOR
+                        reduce factor
+  -w WHITE_VALUE, --white-value WHITE_VALUE
+                        white value
 ```
 2. From Python
 ```python
