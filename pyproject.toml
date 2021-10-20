@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "pathfinder"
+version = "0.1.3"
+description = "Find path from start to goal on image"
+authors = ["Konstantin Freidlin <freidlinks@ya.ru>"]
+packages = [
+    { include = "pathfinder"}
+]
+repository = "https://github.com/mnogom/pathfinder"
+[tool.poetry.dependencies]
+python = ">=3.9,<3.11"
+Pillow = "^8.4.0"
+numpy = "^1.21.2"
+argparse = "^1.4.0"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+pathfinder = "pathfinder.scripts.find_path:main"
