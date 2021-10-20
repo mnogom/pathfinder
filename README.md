@@ -1,4 +1,5 @@
-# Path finder
+# Path Finder
+_Console utility to find path on RGB image_
 
 ---
 [![Maintainability](https://api.codeclimate.com/v1/badges/7a6eeed13e700478f9eb/maintainability)](https://codeclimate.com/github/mnogom/pathfinder/maintainability)
@@ -48,6 +49,7 @@ pathfinder.put_image(output_image, 'path/to/pathed_file.jpg')
 ### Features
 1. Set up white value for outline image
 2. Reduce image for performance improvement
+3. Working with only RGB image
 
 ---
 ### Examples
