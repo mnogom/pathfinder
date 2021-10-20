@@ -48,3 +48,12 @@ pathfinder.put_image(output_image, 'path/to/pathed_file.jpg')
 ### Features
 1. Set up white value for outline image
 2. Reduce image for performance improvement
+
+---
+### Examples
+1. Input image
+![Input image](https://github.com/mnogom/pathfinder/blob/main/examples/1/plan.jpg?raw=true "Optional Title")
+```commandline
+poetry run pathfinder examples/1/plan.jpg -s 420 380 -g 520 600 -r 5 -w 240
+```
+![Output image](https://github.com/mnogom/pathfinder/blob/main/examples/1/plan-from-\(420, 380\)-to-\(520, 600\).jpg?raw=true "Optional Title")

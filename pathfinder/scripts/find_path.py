@@ -31,7 +31,7 @@ def main() -> None:
     image_with_path = layout.get_image_path(plan)
 
     image_name, ext = os.path.splitext(name)
-    image_name += f'-from-({start_x}, {start_y})-to-({goal_x}, {goal_y})'
+    image_name += f'-from-{start_x}_{start_y}-to-{goal_x}_{goal_y}'
     image_name += ext
     save_path = os.path.join(directory, image_name)
 
