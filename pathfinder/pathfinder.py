@@ -3,7 +3,7 @@
 from pathfinder import node, layout
 
 
-def heuristic_cost_estimate(node1: dict, node2: dict):
+def _heuristic_cost_estimate(node1: dict, node2: dict):
     """Heuristic cost estimate
     Read more:
     * https://neerc.ifmo.ru/wiki/index.php?title=Алгоритм_A*
@@ -20,7 +20,7 @@ def heuristic_cost_estimate(node1: dict, node2: dict):
     return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** (1/2)
 
 
-def dist_between(next_node, outline):
+def _dist_between(next_node, outline):
     """Distance between nodes.
 
     :param node: node
@@ -61,7 +61,7 @@ def get_path(start_x: int,
     goal = node.create(goal_x, goal_y)
 
     node.set_g(start, 0)
-    node.set_h(start, heuristic_cost_estimate(start, goal))
+    node.set_h(start, _heuristic_cost_estimate(start, goal))
     node.set_f(start, node.get_g(start) + node.get_h(start))
 
     close_list = []
@@ -74,7 +74,7 @@ def get_path(start_x: int,
         current = min(open_list, key=lambda x: node.get_f(x))
 
         if node.is_equal(current, goal):
-            return reconstruct_path(plan, current)
+            return _reconstruct_path(plan, current)
 
         open_list.remove(current)
         close_list.append(current)
@@ -83,8 +83,8 @@ def get_path(start_x: int,
             if node.in_list(neighbor, close_list):
                 continue
 
-            temp_g = node.get_g(current) + dist_between(neighbor,
-                                                        outline)
+            temp_g = node.get_g(current) + _dist_between(neighbor,
+                                                         outline)
 
             if not node.in_list(neighbor, open_list):
                 open_list.append(neighbor)
@@ -99,12 +99,12 @@ def get_path(start_x: int,
                 node.set_parent(neighbor, current)
                 node.set_g(neighbor, temp_g)
                 node.set_h(neighbor,
-                           heuristic_cost_estimate(neighbor, goal))
+                           _heuristic_cost_estimate(neighbor, goal))
                 node.set_f(neighbor,
                            node.get_g(neighbor) + node.get_h(neighbor))
 
 
-def reconstruct_path(plan: dict, goal: dict) -> list:
+def _reconstruct_path(plan: dict, goal: dict) -> list:
     """Reconstruct path.
 
     :param plan: layout
