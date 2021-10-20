@@ -11,6 +11,12 @@ _Console utility to find path on RGB image_
 ```commandline
 pip3 install --upgrade git+https://github.com/mnogom/pathfinder.git
 ```
+or
+```commandline
+git clone https://github.com/mnogom/pathfinder.git
+cd pathfinder
+make install
+```
 
 ---
 ### Usage
