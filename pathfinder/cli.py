@@ -13,9 +13,11 @@ def parse_args():
     parser.add_argument(dest='path', help='Path of image')
     parser.add_argument('-s', '--start',
                         nargs=2,
+                        metavar=('X', 'Y'),
                         help='start coordinates')
     parser.add_argument('-g', '--goal',
                         nargs=2,
+                        metavar=('X', 'Y'),
                         help='goal coordinates')
     parser.add_argument('-r', '--reduce-factor',
                         help='reduce factor',
@@ -31,6 +33,7 @@ def parse_args():
     goal_x = int(args.goal[0])
     goal_y = int(args.goal[1])
     reduce_factor = int(args.reduce_factor)
+    white_value = None
     if args.white_value:
         white_value = int(args.white_value)
 

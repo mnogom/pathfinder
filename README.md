@@ -22,8 +22,7 @@ make install
 ### Usage
 1. From command line:
 ```commandline
-usage: pathfinder [-h] [-s START START] [-g GOAL GOAL] [-r REDUCE_FACTOR]
-                  [-w WHITE_VALUE]
+usage: pathfinder [-h] [-s X Y] [-g X Y] [-r REDUCE_FACTOR] [-w WHITE_VALUE]
                   path
 
 Path finder
@@ -33,10 +32,8 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  -s START START, --start START START
-                        start coordinates
-  -g GOAL GOAL, --goal GOAL GOAL
-                        goal coordinates
+  -s X Y, --start X Y   start coordinates
+  -g X Y, --goal X Y    goal coordinates
   -r REDUCE_FACTOR, --reduce-factor REDUCE_FACTOR
                         reduce factor
   -w WHITE_VALUE, --white-value WHITE_VALUE
