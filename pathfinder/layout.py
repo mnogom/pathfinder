@@ -10,7 +10,7 @@ WHITE = 255
 BLACK = 0
 
 
-def read(path: str, reduce_factor=5, white_value=240) -> dict:
+def read(path: str, reduce_factor=5, white_value=None) -> dict:
     """Read layout from path.
 
     :param path: path for image plan
@@ -24,6 +24,9 @@ def read(path: str, reduce_factor=5, white_value=240) -> dict:
     outline = image.copy()
     outline = outline.reduce(reduce_factor)
     outline = outline.convert(GRAYSCALEMOD)
+    if white_value:
+        outline = outline.point(lambda pix: WHITE if pix >= white_value else BLACK,
+                                GRAYSCALEMOD)
     outline = np.array(outline)
     y_min, x_min = (0, 0)
     y_max, x_max = [c_max - 1 for c_max in outline.shape]

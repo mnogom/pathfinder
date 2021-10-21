@@ -22,7 +22,7 @@ def parse_args():
                         default=1)
     parser.add_argument('-w', '--white-value',
                         help='white value',
-                        default=240)
+                        default=None)
     args = parser.parse_args()
 
     path = args.path
@@ -31,6 +31,7 @@ def parse_args():
     goal_x = int(args.goal[0])
     goal_y = int(args.goal[1])
     reduce_factor = int(args.reduce_factor)
-    white_value = int(args.white_value)
+    if args.white_value:
+        white_value = int(args.white_value)
 
     return path, start_x, start_y, goal_x, goal_y, reduce_factor, white_value
