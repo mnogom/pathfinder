@@ -6,7 +6,6 @@ import numpy as np
 from pathfinder import image_manager
 
 GRAYSCALEMOD = 'L'
-BLACKWHITEMOD = '1'
 WHITE = 255
 BLACK = 0
 
@@ -25,21 +24,21 @@ def read(path: str, reduce_factor=5, white_value=240) -> dict:
     outline = image.copy()
     outline = outline.reduce(reduce_factor)
     outline = outline.convert(GRAYSCALEMOD)
-    outline.point(lambda x: WHITE if x > white_value else BLACK,
-                  BLACKWHITEMOD)
     outline = np.array(outline)
     y_min, x_min = (0, 0)
-    y_max, x_max = outline.shape
+    y_max, x_max = [c_max - 1 for c_max in outline.shape]
 
     return {'image': image,
             'image_path': None,
             'outline': {
                 'data': outline,
                 'reduce_factor': reduce_factor,
-                'x_min': x_min,
-                'y_min': y_min,
-                'x_max': x_max,
-                'y_max': y_max
+                'bounds': {
+                    'x_min': x_min,
+                    'y_min': y_min,
+                    'x_max': x_max,
+                    'y_max': y_max
+                }
             }}
 
 
@@ -103,10 +102,7 @@ def get_bounds(layout: dict) -> dict:
     :return: dict of bounds
     """
 
-    keys = ['x_min', 'x_max', 'y_min', 'y_max']
-    return {
-        key: value for key, value in layout['outline'].items() if key in keys
-    }
+    return layout['outline']['bounds']
 
 
 def get_reduce_factor(layout: dict) -> int:

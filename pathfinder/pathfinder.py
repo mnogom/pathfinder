@@ -3,6 +3,15 @@
 from pathfinder import node, layout
 
 
+def _get_euclidean_distance(node1, node2):
+
+    x1 = node.get_x(node1)
+    x2 = node.get_x(node2)
+    y1 = node.get_y(node1)
+    y2 = node.get_y(node2)
+    return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** (1/2)
+
+
 def _heuristic_cost_estimate(node1: dict, node2: dict):
     """Heuristic cost estimate
     Read more:
@@ -13,14 +22,10 @@ def _heuristic_cost_estimate(node1: dict, node2: dict):
     :return: value of heuristic cost
     """
 
-    x1 = node.get_x(node1)
-    x2 = node.get_x(node2)
-    y1 = node.get_y(node1)
-    y2 = node.get_y(node2)
-    return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** (1/2)
+    return _get_euclidean_distance(node1, node2)
 
 
-def _dist_between(next_node, outline):
+def _dist_between(node1, node2, outline):
     """Distance between nodes.
 
     :param node: node
@@ -28,10 +33,10 @@ def _dist_between(next_node, outline):
     :return: distance with weight
     """
 
-    x = next_node['x']
-    y = next_node['y']
+    x = node2['x']
+    y = node2['y']
     weight = 255 - outline[y][x]
-    return weight
+    return weight * _get_euclidean_distance(node1, node2)
 
 
 def get_path(start_x: int,
@@ -83,7 +88,8 @@ def get_path(start_x: int,
             if node.in_list(neighbor, close_list):
                 continue
 
-            temp_g = node.get_g(current) + _dist_between(neighbor,
+            temp_g = node.get_g(current) + _dist_between(current,
+                                                         neighbor,
                                                          outline)
 
             if not node.in_list(neighbor, open_list):
