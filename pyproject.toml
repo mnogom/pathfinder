@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pathfinder"
-version = "0.1.6"
+version = "0.1.6    "
 description = "Find path from start to goal on image"
 authors = ["Konstantin Freidlin <freidlinks@ya.ru>"]
 packages = [
