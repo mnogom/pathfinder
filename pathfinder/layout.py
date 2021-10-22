@@ -33,7 +33,7 @@ def read(path: str, reduce_factor=5, white_value=None) -> dict:
     y_max, x_max = [c_max - 1 for c_max in outline.shape]
 
     return {'image': image,
-            'image_path': None,
+            'image_with_path': None,
             'outline': {
                 'data': outline,
                 'reduce_factor': reduce_factor,
@@ -69,7 +69,7 @@ def get_image(layout: dict):
     return layout['image']
 
 
-def get_image_path(layout: dict):
+def get_image_with_path(layout: dict):
     """Get image path of layout.
 
     :param layout: layout

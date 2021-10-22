@@ -40,12 +40,13 @@ optional arguments:
                         white value
 ```
 2. From Python
+
 ```python
 import pathfinder
 
 plan = pathfinder.read('path/to/file.jpg', reduce_factor=5, white_value=240)
 pathfinder.get_path(start_x, start_y, goal_x, goal_y, plan)
-output_image = pathfinder.get_image_path(plan)
+output_image = pathfinder.get_image_with_path(plan)
 pathfinder.put_image(output_image, 'path/to/pathed_file.jpg')
 ```
 
