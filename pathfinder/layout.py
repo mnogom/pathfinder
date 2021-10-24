@@ -76,7 +76,7 @@ def get_image_with_path(layout: dict):
     :return: image with path
     """
 
-    return layout['image_path']
+    return layout['image_with_path']
 
 
 def set_image_path(layout: dict, value) -> None:
@@ -86,7 +86,7 @@ def set_image_path(layout: dict, value) -> None:
     :param value: value to set
     """
 
-    layout['image_path'] = value
+    layout['image_with_path'] = value
 
 
 def get_outline(layout: dict):
