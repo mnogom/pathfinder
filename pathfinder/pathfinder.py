@@ -1,6 +1,6 @@
 """Pathfinder module."""
 
-from pathfinder import node, layout
+from pathfinder import node, layout, exceptions
 
 
 def _get_euclidean_distance(node1, node2):
@@ -108,6 +108,9 @@ def get_path(start_x: int,
                            _heuristic_cost_estimate(neighbor, goal))
                 node.set_f(neighbor,
                            node.get_g(neighbor) + node.get_h(neighbor))
+
+    raise exceptions.PFEmptyOpenList('Open list is empty. It is mean '
+                                     'that path probably doesn\'t exists')
 
 
 def _reconstruct_path(plan: dict, goal: dict) -> list:
