@@ -4,7 +4,12 @@
 
 import os
 
-from pathfinder import parse_args, get_image, create_layout, get_path, get_image_with_path, put_image
+from pathfinder import (parse_args,
+                        get_image,
+                        create_layout,
+                        get_path,
+                        get_image_with_path,
+                        put_image)
 
 
 def main() -> None:
@@ -20,14 +25,14 @@ def main() -> None:
 
     image = get_image(image_path)
     plan = create_layout(image,
-                                reduce_factor=reduce_factor,
-                                white_value=white_value)
+                         reduce_factor=reduce_factor,
+                         white_value=white_value)
 
     plan = get_path(start_x,
-                               start_y,
-                               goal_x,
-                               goal_y,
-                               plan)
+                    start_y,
+                    goal_x,
+                    goal_y,
+                    plan)
     image_with_path = get_image_with_path(plan)
 
     directory, name = os.path.split(image_path)

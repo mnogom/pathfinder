@@ -102,8 +102,8 @@ def get_path(start_x: int,
                 neighbor = node.set_g(neighbor, temp_g)
                 neighbor = node.set_h(neighbor,
                                       _heuristic_cost_estimate(neighbor, goal))
-                neighbor = node.set_f(neighbor,
-                                      node.get_g(neighbor) + node.get_h(neighbor))
+                neighbor = node.set_f(
+                    neighbor, node.get_g(neighbor) + node.get_h(neighbor))
                 open_list.append(neighbor)
 
     raise PFEmptyOpenList('Open list is empty. It is mean '
