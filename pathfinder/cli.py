@@ -8,7 +8,6 @@ def parse_args():
 
     :return: path, start_x, start_y, goal_x, goal_y, reduce_factor, white_value
     """
-
     parser = argparse.ArgumentParser(description='Path finder')
     parser.add_argument(dest='path', help='Path of image')
     parser.add_argument('-s', '--start',

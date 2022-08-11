@@ -9,7 +9,6 @@ def get_image(path: str):
     :param path: path of image
     :return: image
     """
-
     return Image.open(path)
 
 
@@ -19,5 +18,4 @@ def put_image(image, path: str) -> None:
     :param image: image (from PIL)
     :param path: path to save
     """
-
     image.save(path)

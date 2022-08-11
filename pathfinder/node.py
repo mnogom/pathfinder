@@ -1,6 +1,5 @@
 """Node module."""
 
-
 def create(x: int, y: int, g=0, h=0, f=0, parent=None) -> dict:
     """Create node element.
 
@@ -12,7 +11,6 @@ def create(x: int, y: int, g=0, h=0, f=0, parent=None) -> dict:
     :param parent: parent of node
     :return: node
     """
-
     x = int(x)
     y = int(y)
     return {'x': x, 'y': y, 'g': g, 'h': h, 'f': f, 'parent': parent}
@@ -24,17 +22,20 @@ def get_h(node: dict):
     :param node: node
     :return: h-value
     """
-
     return node['h']
 
 
-def set_h(node: dict, value) -> None:
+def set_h(node: dict, value) -> dict:
     """Set h value for node.
 
     :param node: node
     :param value: value to set"""
-
-    node['h'] = value
+    return create(get_x(node),
+                  get_y(node),
+                  get_g(node),
+                  value,
+                  get_f(node),
+                  get_parent(node))
 
 
 def get_g(node: dict):
@@ -43,18 +44,21 @@ def get_g(node: dict):
     :param node: node
     :return: g-value
     """
-
     return node['g']
 
 
-def set_g(node: dict, value) -> None:
+def set_g(node: dict, value) -> dict:
     """Set g value for node.
 
     :param node: node
     :param value: value to set
     """
-
-    node['g'] = value
+    return create(get_x(node),
+                  get_y(node),
+                  value,
+                  get_h(node),
+                  get_f(node),
+                  get_parent(node))
 
 
 def get_f(node: dict):
@@ -63,18 +67,21 @@ def get_f(node: dict):
     :param node: node
     :return: f-value
     """
-
     return node['f']
 
 
-def set_f(node: dict, value) -> None:
+def set_f(node: dict, value) -> dict:
     """Set f value for node.
 
     :param node: node
     :param value: value to set
     """
-
-    node['f'] = value
+    return create(get_x(node),
+                  get_y(node),
+                  get_g(node),
+                  get_h(node),
+                  value,
+                  get_parent(node))
 
 
 def get_parent(node: dict) -> dict:
@@ -83,18 +90,21 @@ def get_parent(node: dict) -> dict:
     :param node: node
     :return: parent node
     """
-
     return node['parent']
 
 
-def set_parent(node: dict, parent: dict) -> None:
+def set_parent(node: dict, parent: dict) -> dict:
     """Set parent for node.
 
     :param node: node
     :param parent: parent node
     """
-
-    node['parent'] = parent
+    return create(get_x(node),
+                  get_y(node),
+                  get_g(node),
+                  get_h(node),
+                  get_f(node),
+                  parent)
 
 
 def get_x(node: dict) -> int:
@@ -103,7 +113,6 @@ def get_x(node: dict) -> int:
     :param node: node
     :return: x coordinate
     """
-
     return node['x']
 
 
@@ -113,7 +122,6 @@ def get_y(node: dict) -> int:
     :param node: node
     :return: y coordinate
     """
-
     return node['y']
 
 
@@ -124,7 +132,6 @@ def is_equal(node1: dict, node2: dict) -> bool:
     :param node2: node 2
     :return: True if nodes are equal. False otherwise
     """
-
     return get_x(node1) == get_x(node2) and get_y(node1) == get_y(node2)
 
 
@@ -135,7 +142,6 @@ def in_list(node: dict, array: list) -> bool:
     :param array: list of nodes
     :return: True if node in list. False otherwise
     """
-
     cleaned_node = [get_x(node), get_y(node)]
     cleaned_array = [[get_x(el), get_y(el)] for el in array]
     return cleaned_node in cleaned_array
@@ -155,7 +161,6 @@ def get_neighbors(node: dict,
     :param y_min: min y-coordinate of area
     :return: list of neighbors as nodes
     """
-
     x = get_x(node)
     y = get_y(node)
 

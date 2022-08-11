@@ -1,15 +1,15 @@
 """Pathfinder module."""
 
-from pathfinder import node, layout, exceptions
+from pathfinder import node, layout
+from pathfinder.exceptions import PFEmptyOpenList
 
 
 def _get_euclidean_distance(node1, node2):
-
     x1 = node.get_x(node1)
     x2 = node.get_x(node2)
     y1 = node.get_y(node1)
     y2 = node.get_y(node2)
-    return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** (1/2)
+    return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** (1 / 2)
 
 
 def _heuristic_cost_estimate(node1: dict, node2: dict):
@@ -21,7 +21,6 @@ def _heuristic_cost_estimate(node1: dict, node2: dict):
     :param node2: node 2
     :return: value of heuristic cost
     """
-
     return _get_euclidean_distance(node1, node2)
 
 
@@ -32,7 +31,6 @@ def _dist_between(node1, node2, outline):
     :param outline: outline
     :return: distance with weight
     """
-
     x = node2['x']
     y = node2['y']
     weight = 255 - outline[y][x]
@@ -43,7 +41,7 @@ def get_path(start_x: int,
              start_y: int,
              goal_x: int,
              goal_y: int,
-             plan: dict) -> list:
+             plan: dict) -> dict:
     """Get path. A* algorithm.
     Read more:
     * https://ru.wikibooks.org/wiki/Реализации_алгоритмов/Алгоритм_поиска_A*
@@ -55,7 +53,6 @@ def get_path(start_x: int,
     :param plan: layout
     :return: path as list of tuples.
     """
-
     reduce_factor = layout.get_reduce_factor(plan)
     start_x /= reduce_factor
     start_y /= reduce_factor
@@ -65,9 +62,9 @@ def get_path(start_x: int,
     start = node.create(start_x, start_y)
     goal = node.create(goal_x, goal_y)
 
-    node.set_g(start, 0)
-    node.set_h(start, _heuristic_cost_estimate(start, goal))
-    node.set_f(start, node.get_g(start) + node.get_h(start))
+    start = node.set_g(start, 0)
+    start = node.set_h(start, _heuristic_cost_estimate(start, goal))
+    start = node.set_f(start, node.get_g(start) + node.get_h(start))
 
     close_list = []
     open_list = [start]
@@ -93,7 +90,6 @@ def get_path(start_x: int,
                                                          outline)
 
             if not node.in_list(neighbor, open_list):
-                open_list.append(neighbor)
                 temp_g_best = True
             else:
                 if temp_g < node.get_g(current):
@@ -102,25 +98,25 @@ def get_path(start_x: int,
                     temp_g_best = False
 
             if temp_g_best:
-                node.set_parent(neighbor, current)
-                node.set_g(neighbor, temp_g)
-                node.set_h(neighbor,
-                           _heuristic_cost_estimate(neighbor, goal))
-                node.set_f(neighbor,
-                           node.get_g(neighbor) + node.get_h(neighbor))
+                neighbor = node.set_parent(neighbor, current)
+                neighbor = node.set_g(neighbor, temp_g)
+                neighbor = node.set_h(neighbor,
+                                      _heuristic_cost_estimate(neighbor, goal))
+                neighbor = node.set_f(neighbor,
+                                      node.get_g(neighbor) + node.get_h(neighbor))
+                open_list.append(neighbor)
 
-    raise exceptions.PFEmptyOpenList('Open list is empty. It is mean '
-                                     'that path probably doesn\'t exists')
+    raise PFEmptyOpenList('Open list is empty. It is mean '
+                          'that path probably doesn\'t exists')
 
 
-def _reconstruct_path(plan: dict, goal: dict) -> list:
+def _reconstruct_path(plan: dict, goal: dict) -> dict:
     """Reconstruct path.
 
     :param plan: layout
     :param goal: last node
     :return: path as list of tuples.
     """
-
     current = goal
     reduce_factor = layout.get_reduce_factor(plan)
 
@@ -130,5 +126,5 @@ def _reconstruct_path(plan: dict, goal: dict) -> list:
         current_y = node.get_y(current) * reduce_factor
         path.append((current_x, current_y))
         current = node.get_parent(current)
-    layout.draw_path(plan, path)
-    return path
+    image_path = layout.draw_path(plan, path)
+    return layout.set_image_path(plan, image_path)
